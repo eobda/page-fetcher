@@ -1,6 +1,6 @@
 const request = require('request');
-const fs = require("fs");
-const { fileURLToPath } = require('url');
+const fs = require('fs');
+const readline = require('readline');
 
 /*
 It should take two command line arguments:
@@ -15,8 +15,10 @@ request(url, (error, response, body) => {
   if (error) {
     console.log('error:', error);
   } else {
-    // need to download file to file path!!!
-    // check if file already exists - fs.access(filePath)
+    // check if file already exists - if exists, prompt user to enter Y + enter to overwrite file, otherwise skp and exit the app
+    fs.access(filePath, fs.constants.F_OK, (err) => {
+      console.log(`${filePath} ${err ? 'does not exist' : 'exists'}`);
+    });
 
     downloadFile(filePath, body);
   }

@@ -11,20 +11,37 @@ It should take two command line arguments:
 const url = process.argv[2];
 const filePath = process.argv[3];
 
+// main body is the request
 request(url, (error, response, body) => {
   if (error) {
     console.log('error:', error);
   } else {
-    // check if file already exists - if exists, prompt user to enter Y + enter to overwrite file, otherwise skp and exit the app
-    fs.access(filePath, fs.constants.F_OK, (err) => {
-      console.log(`${filePath} ${err ? 'does not exist' : 'exists'}`);
-    });
-
-    downloadFile(filePath, body);
+  // check if file exists
+    if (checkForFile(filePath)) {
+      // prompt user to enter Y/N + enter
+      // if user enters Y + enter, proceed with writing file
+      // if user enters N, exit the app
+      
+    } else {
+      // proceed with writing file
+      downloadFile(filePath, body);
+    }
   }
 });
 
-const downloadFile = function (path, file) {
+// checks if file at specified path already exists
+const checkForFile = (path) => {
+  fs.access(path, fs.constants.F_OK, (err) => {
+    // if file does not exist it will return an error
+    if (err) return false;
+
+    // if no error is returned then the file exists
+    return true;
+  });
+};
+
+// writes file to specified path and logs confirmation message to the console
+const downloadFile = (path, file) => {
   fs.writeFile(path, file, 'utf8', (err) => {
     if (err) {
       console.log('error:', err);

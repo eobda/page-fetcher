@@ -22,7 +22,11 @@ request(url, (error, response, body) => {
       // prompt user to enter Y/N + enter
       // if user enters Y + enter, proceed with writing file
       // if user enters N, exit the app
-      
+      rl.question(`${filePath} already exists! Overwite file? Y/N `, (answer) => {
+
+        rl.close();
+  
+      });
     } else {
       // proceed with writing file
       downloadFile(filePath, body);

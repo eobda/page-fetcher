@@ -5,12 +5,16 @@ It should take two command line arguments:
   * a local file path
 */
 
-const args = process.argv;
-console.log('args:', args);
 const url = process.argv[2];
-console.log('url:', url);
 const filePath = process.argv[3];
-console.log('filePath:', filePath);
+
+console.log('testing filePath.slice:', url + filePath.slice(1));
+
+// request(url + filePath.slice(1), (error, response, body) => {
+//   console.log('error:', error);
+//   console.log('statusCode:', response && response.statusCode);
+//   console.log('body:', body);
+// });
 
 /*
 Upon completion, it should print out a message like Downloaded and saved 1235 bytes to ./index.html.

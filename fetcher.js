@@ -5,6 +5,9 @@ It should take two command line arguments:
   * a local file path
 */
 
+const args = process.argv.slice(2);
+console.log('args:', args);
+
 /*
 Upon completion, it should print out a message like Downloaded and saved 1235 bytes to ./index.html.
 */

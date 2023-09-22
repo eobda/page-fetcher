@@ -25,6 +25,19 @@ request(url, (error, response, body) => {
 
       // if user enters Y + enter, proceed with writing file
       // if user enters N, exit the app
+
+      rl.on('line', (answer) => {
+        if (answer !== 'Y' && answer !== 'N') {
+          rl.prompt();
+        } else if (answer === 'Y') {
+          console.log('File overwritten.');
+          downloadFile(filePath, body);
+          rl.close();
+        } else {
+          console.log('File not overwritten.');
+          rl.close();
+        }
+      });
   
     } else {
       // proceed with writing file

@@ -1,4 +1,6 @@
 const request = require('request');
+const fs = require("fs");
+
 /*
 It should take two command line arguments:
   * a URL
@@ -8,11 +10,12 @@ It should take two command line arguments:
 const url = process.argv[2];
 const filePath = process.argv[3];
 
-// format given is: url ends in / + file path begins with ./
-request(url + filePath.slice(2), (error, response, body) => {
+request(url, (error, response, body) => {
   if (error) {
     console.log('error:', error);
   } else {
+    // need to download file to file path!!!
+    
     // 1 char = 1 byte
     console.log(`Downloaded and saved ${body.length} bytes to ${filePath}.`);
   }

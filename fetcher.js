@@ -2,12 +2,13 @@ const request = require('request');
 const fs = require('fs');
 const readline = require('readline');
 
-/*
-It should take two command line arguments:
-  * a URL
-  * a local file path
-*/
+// create interface for readline
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
 
+// command line inputs from user
 const url = process.argv[2];
 const filePath = process.argv[3];
 

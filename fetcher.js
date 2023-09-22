@@ -15,8 +15,12 @@ request(url, (error, response, body) => {
     console.log('error:', error);
   } else {
     // need to download file to file path!!!
-    
-    // 1 char = 1 byte
-    console.log(`Downloaded and saved ${body.length} bytes to ${filePath}.`);
+    fs.writeFile(filePath, body, 'utf8', (err) => {
+      if (err) {
+        console.log('error:', err);
+      }
+      // 1 char = 1 byte
+      console.log(`Downloaded and saved ${body.length} bytes to ${filePath}.`);
+   });
   }
 });
